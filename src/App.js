@@ -9,10 +9,12 @@ const App = () => {
     React.createElement(Pizza, {
       name: "Margherita",
       description: "Tomato, mozzarella, basil",
+      image:"/public/pizzas/pepperoni.webp",
     }),
     React.createElement(Pizza, {
       name: "Pepperoni",
       description: "Tomato, mozzarella, pepperoni",
+      image:"/public/pizzas/hawaiian.webp",
     }),
     React.createElement(Pizza, {
       name: "Hawaiian",
@@ -21,11 +23,9 @@ const App = () => {
     React.createElement(Pizza, {
       name: "Vegetarian",
       description: "Tomato, mozzarella, vegetables",
+      image:  "/public/pizzas/big_meat.webp"
     }),
-    React.createElement(Pizza, {
-      name: "BBQ Chicken",
-      description: "BBQ sauce, mozzarella, chicken",
-    }),
+   
   ]);
 };
 const container = document.getElementById("root");
