@@ -1,8 +1,29 @@
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import Pizza from "./Pizza";
+  const intl = new Intl.NumberFormat("en-us", {
+    style: "currency",
+    currency: "KSH",
+  });
 export default function Order() {
+  const [pizzaTypes, setPizzaTypes] = useState([]);
   const [pizzaType, setPizzaType] = useState('Pepperoni')
   const [pizzaSize, setPizzaSize] = useState('m');
+  const [loading, setLoading] = useState(true);
+  
+  let price, selectedPizza;
+  if (!loading) {
+    selectedPizza = pizzaTypes.find((pizza)=>pizzaType === pizza.id)
+  }
+  async function fetchPizzaTypes(){
+    const pizzaRes = await fetch("/api/pizzas")
+    const pizzaJson = await pizzaRes.json();
+    setPizzaTypes(pizzaJson)
+    setLoading(false)
+  }
+  useEffect(() => {
+    fetchPizzaTypes();
+  },[])
+
   return (
     <div className="order">
       <h2>Create Order </h2>
@@ -16,9 +37,12 @@ export default function Order() {
               value={pizzaType}
               onChange={(e) => setPizzaType(e.target.value)}
             >
-              <option value="Margherita">Margherita</option>
-              <option value="Pepperoni">Pepperoni</option>
-              <option value="Hawaiian">Hawaiian</option>
+             
+              {pizzaTypes.map((pizza) => (
+                <option key={pizza.id} value={pizza.id}>
+                  {pizza.name}
+                </option>
+              ))}
             </select>
             <div>
               <label htmlFor="pizza-size">Pizza Size</label>
@@ -29,7 +53,7 @@ export default function Order() {
                     id="small"
                     name="pizza-size"
                     value="S"
-                    onChange={(e) => setPizzaType(e.target.value)}
+                    onChange={(e) => setPizzaSize(e.target.value)}
                     checked={pizzaSize === "S"}
                   />
                   <label htmlFor="small">Small</label>
@@ -40,7 +64,7 @@ export default function Order() {
                     id="medium"
                     name="pizza-size"
                     value="M"
-                    onChange={(e) => setPizzaType(e.target.value)}
+                    onChange={(e) => setPizzaSize(e.target.value)}
                     checked={pizzaSize === "M"}
                   />
                   <label htmlFor="medium">Medium</label>
@@ -51,7 +75,7 @@ export default function Order() {
                     id="large"
                     name="pizza-size"
                     value="L"
-                    onChange={(e) => setPizzaType(e.target.value)}
+                    onChange={(e) => setPizzaSize(e.target.value)}
                     checked={pizzaSize === "L"}
                   />
                   <label htmlFor="large">Large</label>
