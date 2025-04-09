@@ -2,7 +2,7 @@ import { useEffect,useState } from "react";
 import Pizza from "./Pizza";
   const intl = new Intl.NumberFormat("en-us", {
     style: "currency",
-    currency: "KSH",
+    currency: "USD",
   });
 export default function Order() {
   const [pizzaTypes, setPizzaTypes] = useState([]);
