@@ -47,7 +47,7 @@ export default function Order() {
             </select>
             <div>
               <label htmlFor="pizza-size">Pizza Size</label>
-              <div>
+             
                 <span>
                   <input
                     type="radio"
@@ -81,12 +81,11 @@ export default function Order() {
                   />
                   <label htmlFor="large">Large</label>
                 </span>
-              </div>
             </div>
+          </div>
             <button type="submit">Add to cart</button>
-            <div className="order-pizza">
               {loading ? (<p>Loading.....</p>):(
-                <>
+            <div className="order-pizza">
                   {selectedPizza && (
                     <Pizza
                       name={selectedPizza.name}
@@ -94,11 +93,9 @@ export default function Order() {
                       image={selectedPizza.image}
                     />
                   )}
-                  <p>{ price}</p>
-                </>
-              )}
+                  <p>{ price}</p>  
             </div>
-          </div>
+              )}
         </div>
       </form>
     </div>
