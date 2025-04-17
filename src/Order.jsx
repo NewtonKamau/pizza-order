@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext, use } from "react";
 import Pizza from "./Pizza";
 import Cart from './Cart';
+import { CartContext } from "./contexts";
 
-// feel free to change en-US / USD to your locale
 const intl = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
@@ -13,7 +13,7 @@ export default function Order() {
   const [pizzaSize, setPizzaSize] = useState("M");
   const [pizzaTypes, setPizzaTypes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useContext(CartContext);
   async function checkout() {
     setLoading(true);
     await fetch('api/order', {
